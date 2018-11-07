@@ -50,4 +50,42 @@
         </div>
 </body>
 </body>
+   <div class="container">
+  <h2>Registration</h2>
+  <form action="" name="registration">
+
+    <label for="firstname">First Name</label>
+    <input type="text" name="firstname" id="firstname" placeholder="solihin"/>
+
+    <label for="lastname">Last Name</label>
+    <input type="text" name="lastname" id="lastname" placeholder="hin"/>
+
+    <label for="npm">Npm</label>
+    <input type="npm" name="npm" id="npm" placeholder="16115653"/>
+
+    <label for="kelas">Kelas</label>
+    <input type="kelas" name="kelas" id="kelas" placeholder="4KA20"/>
+
+    <button type="submit">Oke</button>
+
+  </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.text-warning').hide();
+$('input').each(function(){ 
+			$(this).blur(function(){ //blur function itu dijalankan saat element kehilangan fokus
+				if (! $(this).val()){ //this mengacu pada text box yang sedang fokus
+					return get_error_text(this); //function get_error_text ada di bawah
+				} else {
+					$(this).removeClass('no-valid'); 
+					$(this).parent().find('.text-warning').hide();//cari element dengan class has-warning dari element induk text yang sedang focus
+					$(this).closest('div').removeClass('has-warning');
+					$(this).closest('div').addClass('has-success');
+					$(this).parent().find('.form-control-feedback').removeClass('glyphicon glyphicon-warning-sign');
+					$(this).parent().find('.form-control-feedback').addClass('glyphicon glyphicon-ok');
+				}
+			});
+		});
+</script>
 </html>
