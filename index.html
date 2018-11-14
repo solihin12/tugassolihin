@@ -47,45 +47,153 @@
                     Apa itu Mahasiswa
                 </h1>
                 Mahasiswa adalah sebutan bagi orang yang sedang menempuh pendidikan tinggi di sebuah perguruan tinggi yang terdiri atas sekolah tinggi, akademi, dan yang paling umum adalah universitas. Sepanjang sejarah, mahasiswa di berbagai negara mengambil peran penting dalam sejarah suatu negara
+ /div>
+<form name="form" id="validation-reg" method="post" action="" class="form-login">
+ <h2 class="form-login-heading">Form Data Mahasiswa</h2>
+     <div id="loading" style="text-align: center"></div>
+		<br>
+	<div class="form-group">
+             <div class="col-sm-12">
+		  <input type="text"  id="nama" name="nama" class="form-control" placeholder="Nama" autofocus>
+              </div>
+	</div>
+ 
+<br>
+ 
+	<div class="form-group">
+             <div class="col-sm-12">
+		   <input type="kelas" id="kelas" name="kelas" class="form-control" placeholder="Kelas">
+             </div>
+	</div>
+ 
+         <br>
+ 
+         <div class="form-group">
+              <div class="col-sm-12">
+                  <input type="npm" id="npm" name="npm" class="form-control" placeholder="Npm">
+               </div>
         </div>
-</body>
-</body>
-   <div class="container">
-  <h2>Registration</h2>
-  <form action="" name="registration">
+ 
+            <br>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" id="nohp" name="nohp" class="form-control" placeholder="Masukan No Handphone Anda">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label class="checkbox">
+		                <span class="pull-right">
+		                    <a href="index.php">Back to Login</a>
+		                </span>
+		            </label>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+		            <button class="btn btn-theme btn-block"><i class="fa fa-lock"></i> REGISTER</button>
+                            </div>
+					</div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <footer class="site-footer">
+                        <div class="text-center">
+                            2015 <a href="http://andeznet.com">AndezNet</a>
+                        </div>
+                    </footer>
+                </form>
 
-    <label for="firstname">First Name</label>
-    <input type="text" name="firstname" id="firstname" placeholder="solihin"/>
 
-    <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" id="lastname" placeholder="hin"/>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <a href="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js">
 
-    <label for="npm">Npm</label>
-    <input type="npm" name="npm" id="npm" placeholder="16115653"/>
-
-    <label for="kelas">Kelas</label>
-    <input type="kelas" name="kelas" id="kelas" placeholder="4KA20"/>
-
-    <button type="submit">Oke</button>
-
-  </form>
-</div>
 <script type="text/javascript">
-$(document).ready(function(){
-	$('.text-warning').hide();
-$('input').each(function(){ 
-			$(this).blur(function(){ //blur function itu dijalankan saat element kehilangan fokus
-				if (! $(this).val()){ //this mengacu pada text box yang sedang fokus
-					return get_error_text(this); //function get_error_text ada di bawah
-				} else {
-					$(this).removeClass('no-valid'); 
-					$(this).parent().find('.text-warning').hide();//cari element dengan class has-warning dari element induk text yang sedang focus
-					$(this).closest('div').removeClass('has-warning');
-					$(this).closest('div').addClass('has-success');
-					$(this).parent().find('.form-control-feedback').removeClass('glyphicon glyphicon-warning-sign');
-					$(this).parent().find('.form-control-feedback').addClass('glyphicon glyphicon-ok');
-				}
-			});
-		});
-</script>
+ 
+      jQuery(function($) {
+          $.validator.setDefaults({
+              submitHandler: function () {
+                  register();
+ 
+              }
+ 
+          });
+ 
+          $().ready(function () {
+              // 
+              $("#validation-reg").validate({
+                  errorElement: 'div',
+                  errorClass: 'help-block',
+                  focusInvalid: false,
+                  rules: {
+                      npm: {
+                          required: true
+                      },
+ 
+                      nama: {
+                          required: true
+                          minlength: 5
+                      },
+                      kelas: {
+                          required: true,
+                          minlength: 5
+                      },
+                      
+ 
+                      nohp: {
+                          required: true
+                      }
+ 
+                  },
+ 
+                  messages: {
+ 
+                      kelas: {
+                          required: "Please specify a class.",
+                          minlength: "Please specify a secure class."
+                      },
+                      username: "Mohon isi username anda",
+                      nohp: "Mohon isi no handphone anda"
+                  },
+ 
+ 
+                  highlight: function (e) {
+                      $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
+                  },
+ 
+                  success: function (e) {
+                      $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+                      $(e).remove();
+                  }
+ 
+              })
+          });
+ 
+ 
+          function register() {
+              $("#loading").html('<div class="alert alert-block alert-success">Mohon Tunggu....</div>');
+              $.post('daftar.input.php', $("form").serialize(), function (hasil) {
+                  $('form input[type="text"],form input[type="password2"],form input[type="email"],form input[type="text"]').val('');
+                  $("#loading").html(hasil);
+              });
+          };
+ 
+ 
+ 
+ 
+      });
+ 
+ 
+ 
+ 
+  </script>
 </html>
